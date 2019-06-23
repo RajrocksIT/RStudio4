@@ -1,0 +1,43 @@
+---
+title: "practise"
+output: html_document
+---
+
+```{r}
+
+Rajcereal = read.csv('cereals.CSV',header = TRUE, sep = ',')
+Rajcereal
+# 1 find the location of missing values
+#is.na(Rajcereal)
+row.names(Rajcereal)[rowSums(is.na(Rajcereal))>0]
+colnames(Rajcereal)[colSums(is.na(Rajcereal))>0]
+Rajcereal[row.names(Rajcereal)[rowSums(is.na(Rajcereal))>0], colnames(Rajcereal)[colSums(is.na(Rajcereal))>0] ]
+
+# I chose 58th row which has NA value for 2 columns. I chose 58th row which has NA value for Carbo.
+
+
+
+```
+
+```{r}
+# 2 find the category of the missing value row
+#as.factor(Rajcereal$Type)
+#as.numeric(Rajcereal$Type)
+#as.numeric(as.factor(Rajcereal$Type))
+gocarbo <-subset(Rajcereal, as.numeric(as.factor(Rajcereal$Type)) == 2)
+gocarbo
+
+```
+
+```{r}
+# 3 calculate the avg of the total value for that category
+mean(gocarbo$Carbo, na.rm = TRUE)
+
+```
+
+```{r}
+# 4 Populate the missing value based on its category avg.
+Rajcereal$Carbo[is.na(Rajcereal$Carbo)] <- mean(gocarbo$Carbo, na.rm = TRUE)
+Rajcereal
+```
+

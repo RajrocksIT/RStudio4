@@ -1,0 +1,45 @@
+---
+title: "class notes"
+output: html_document
+---
+
+```{r}
+#read.csv('cereals.CSV')
+my.cereal = read.delim('cereals.CSV', sep = ',')
+my.cereal
+mean(my.cereal$Quaker)
+as.factor(my.cereal$Quaker)
+my.cereal$Quaker = as.factor(my.cereal$Quaker)
+my.cereal
+summary(my.cereal)
+#cereal2 was used by professor. one row in fat column was 'not available'.
+#my.cereal2 = my.cereal[my.cereal$Fat='Not available',]
+#my.cereal2$fat <- as.numeric(my.cereal2$fat)
+#summary(my.cereal2)
+#is.numeric(my.cereal2$fat)
+#sapply(my.cereal2$fat, is.numeric
+#my.cereal[!is.na(my.cereal)]
+is.na(my.cereal)
+#the below was used to find not available values in a row. if greater then zero, then there are not available valuse in that row.
+rowSums(is.na(my.cereal))
+rowSums(is.na(my.cereal)) == 0
+my.cereal[rowSums(is.na(my.cereal)) == 0,]
+
+#avg of p0tass by removing NA value row
+mean(my.cereal$Potass, na.rm = TRUE)
+
+is.na(my.cereal$Potass)
+
+my.cereal$Potass[is.na(my.cereal$Potass)]
+
+#below we inserted 98.66667(i.e mean of other values) in the not available portion of the potass column
+my.cereal$Potass[is.na(my.cereal$Potass)] <- mean(my.cereal$Potass, na.rm = TRUE)
+my.cereal
+
+
+```
+
+```{r}
+
+```
+
